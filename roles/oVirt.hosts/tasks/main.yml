@@ -47,6 +47,7 @@
     - hosts
 
 - name: Wait for hosts to be added
+  no_log: True
   async_status: "jid={{ item.ansible_job_id }}"
   register: job_result
   with_items:
