@@ -3,12 +3,12 @@ class FilterModule(object):
     def filters(self):
         'Define filters'
         return {
-            'removepassword': self.removepassword,
+            'removesensitive': self.removesensitive,
         }
 
-    def removepassword(self, data):
+    def removesensitive(self, data, key_to_remove='password'):
         """ If data contains password it will change to SECRETE """
-        for i in range(len(data)):
-            if 'password' in data[i]["item"]:
-                data[i]["item"]['password'] = "SECRET"
+        for value in data:
+            if key_to_remove in value['item']:
+                value['item'][key_to_remove] = "******"
         return data
