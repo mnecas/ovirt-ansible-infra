@@ -392,7 +392,6 @@ Example Playbook
   pre_tasks:
     - name: Login to oVirt
       ovirt_auth:
-        url: "{{ engine_url }}"
         hostname: "{{ engine_fqdn }}"
         username: "{{ engine_user }}"
         password: "{{ engine_password }}"
