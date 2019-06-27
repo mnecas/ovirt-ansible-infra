@@ -28,7 +28,7 @@
     auth: "{{ ovirt_auth }}"
     state: "{{ item.state | default(omit) }}"
     name: "{{ item.name }}"
-    address: "{{ item.address }}"
+    address: "{{ item.address | default(omit) }}"
     cluster: "{{ item.cluster }}"
     password: "{{ item.password | default(omit) }}"
     public_key: "{{ item.public_key | default(omit) }}"
@@ -58,3 +58,21 @@
   until: job_result.finished
   retries: "{{ ovirt_hosts_max_timeout // 20 }}"
   delay: 20
+
+- name: Set Power Management
+  ovirt_host_pm:
+    auth: "{{ ovirt_auth }}"
+    address: "{{ item.power_management.address }}"
+    username: "{{ item.power_management.username }}"
+    password: "{{ item.power_management.password }}"
+    type: "{{ item.power_management.type }}"
+    options: "{{ item.power_management.options | default(omit) }}"
+    port: "{{ item.power_management.port | default(omit) }}"
+    name: "{{ item.name }}"
+  when: (item.power_management is defined) and item.power_management and (item.state is undefined or (item.state is defined and item.state != 'absent'))
+  with_items:
+    - "{{ hosts | default([]) }}"
+  loop_control:
+    label: "{{ item.name }}"
+  tags:
+    - hosts
