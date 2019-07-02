@@ -158,6 +158,7 @@ The `power_management` have predefined following vaules:
 | address       | UNDEF            | Address of the power management interface. |
 | state         | present          | Should the host power managment be present/absent.  |
 | username      | UNDEF            | Username to be used to connect to power management interface.      |
+| password      | UNDEF            | Password of the user specified in C(username) parameter. |
 | type          | UNDEF            | Type of the power management. oVirt/RHV predefined values are drac5, ipmilan, rsa, bladecenter, alom, apc, apc_snmp, eps, wti, rsb, cisco_ucs, drac7, hpblade, ilo, ilo2, ilo3, ilo4, ilo_ssh, but user can have defined custom type. |
 | options       | UNDEF            | Dictionary of additional fence agent options (including Power Management slot). Additional information about options can be found at https://github.com/ClusterLabs/fence-agents/blob/master/doc/FenceAgentAPI.md. |
 | port          | UNDEF            | Power management interface port. |
